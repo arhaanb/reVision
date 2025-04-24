@@ -6,7 +6,8 @@ import ThemeSelector from "../components/ThemeSelector";
 import ColorPickerSection from "../components/ColorPickerSection";
 import DetailsAndGenerate from "../components/DetailsAndGenerate";
 import { generatePalette } from "../utils/colorUtils";
-import { Import } from "lucide-react";
+import { Import, Upload } from "lucide-react";
+import JSZip from "jszip";
 
 export default function Home() {
   const [count, setCount] = useState(0);
@@ -173,6 +174,7 @@ export default function Home() {
             Generated UI Preview
           </h2>
           <iframe
+            id="generated-iframe"
             title="Generated UI Preview"
             srcDoc={generatedHtml}
             className="w-full max-w-5xl min-h-[700px] rounded-xl border shadow-lg bg-white"
@@ -185,6 +187,32 @@ export default function Home() {
               background: "white",
             }}
           />
+          {/* Right-aligned, modern Netlify deploy button */}
+          <div className="w-full flex justify-end mt-4 pr-2 max-w-5xl">
+            <button
+              onClick={async () => {
+                // Create a zip containing a folder 'project' with index.html inside
+                const zip = new JSZip();
+                zip.folder("project").file("index.html", generatedHtml);
+                const content = await zip.generateAsync({ type: "blob" });
+                const url = URL.createObjectURL(content);
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = "website.zip";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+                // Open Netlify drop in new tab
+                window.open('https://app.netlify.com/drop', '_blank', 'noopener,noreferrer');
+              }}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-500 to-pink-500 text-white font-semibold rounded-lg shadow hover:from-orange-600 hover:to-pink-600 transition-all focus:outline-none focus:ring-2 focus:ring-orange-400 text-lg"
+              style={{ textDecoration: 'none' }}
+            >
+              <Upload className="w-5 h-5 mr-1" />
+              Get your website live now!
+            </button>
+          </div>
         </div>
       )}
     </div>
