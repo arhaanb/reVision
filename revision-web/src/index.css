@@ -1,0 +1,35 @@
+/* index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    /* color-scheme: light dark; */
+}
+
+/* reVision Light Theme Background */
+body, .revision-bg {
+  min-height: 100vh;
+  background: #fff;
+}
+
+
+/* Optional: subtle pattern overlay */
+/* Minimal background, no overlay pattern */
+
+/* Ensure app content is above background pattern */
+#root, .app-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Custom anchor styles */
+a {
+    font-weight: 500;
+    color: #fb923c;
+    transition: color 0.2s;
+}
+a:hover {
+    color: #ea580c;
+}
