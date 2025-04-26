@@ -30,22 +30,27 @@ IT IS VERY IMPORTANT TO ADD LUCIDE ICONS FROM THE WIREFRAME TO THE HTML. Use luc
 After the HTML, output a JSON array on a new line containing objects with the description and id for each image placeholder you added. The JSON must be valid and appear after the HTML. Example:
 <html>...your html here...</html>
 [
-  { "description": "A golfer taking a swing on a sunny day with a clear sky.", "id": "abc12" },
-  { "description": "A golf course with mountains in the background.", "id": "def34" }
+  { "description": "", "id": "abc12" },
+  { "description": "", "id": "def34" }
 ]
 Respond ONLY with the HTML and JSON, nothing else.
 
-for a golf themed app, use the following images 
+for a golf themed app (ONLY IF IT IS A GOLF THEMED APP THAT YOU DETECT), use the following images 
 https://i.ibb.co/gZxJKF2s/golf2.png
-https://i.ibb.co/7xGCGzfn/golf1.png as src please only. even if there are many images, you can alternate between them`;
+https://i.ibb.co/7xGCGzfn/golf1.png as src please only. if there are many images, you can alternate between them.
+
+if it is not about golf follow any additional instructions given or use pleaceholder images from pexels.`;
 
 async function generateUI({ image, colourPalette, theme, details }) {
   // console.log({ image });
-  const userPrompt = `Here is the Colour palette: ${JSON.stringify(
-    colourPalette
-  )}\nTheme: ${theme}\n Use these colours for the UI, make sure readability is kept in mind while making it look good with these colours. Use fonts from fontshare.com. Make sure you write content for the design and not just example/sample content. Use Tailwind CSS. Generate a beautiful, modern UI as a single HTML file. ${
-    details ? `\nExtra information: ${details}` : ""
-  }`;
+  console.log({ details });
+  const userPrompt = `Here is the Colour palette: 
+  ${JSON.stringify(colourPalette)}
+  
+  Theme: ${theme}
+  Use these colours for the UI, make sure readability is kept in mind while making it look good with these colours. Use fonts from fontshare.com. Make sure you write content for the design and not just example/sample content. Use Tailwind CSS. Generate a beautiful, modern UI as a single HTML file. 
+  
+  ${details ? `\nKeep this information in mind: ${details}` : ""}`;
   const response = await axios.post(
     "https://api.openai.com/v1/chat/completions",
     {

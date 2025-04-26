@@ -59,7 +59,12 @@ app.post("/generate-ui", async (req, res) => {
     return res.status(400).json({ error: "theme (string) required" });
   }
   try {
-    const html = await generateUI({ image, colourPalette, theme });
+    const html = await generateUI({
+      image,
+      colourPalette,
+      theme,
+      details: req?.body?.details || false,
+    });
     res.send(html);
   } catch (err) {
     console.error(
