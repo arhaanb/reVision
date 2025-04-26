@@ -1,7 +1,7 @@
 const axios = require("axios");
+require("dotenv").config();
 
-const OPENAI_API_KEY =
-  "sk-proj-f0M7ysFxD8NxlHaYRQbST3BlbkFJmP1NwGx4YYJe9SSAyGbB";
+const OPENAI_API_KEY = process.env.OPENAIKEY;
 
 const systemPrompt = `You are an expert web developer and designer who specializes in tailwind css and ui design. 
 A user will provide you with a low-fidelity wireframe of an application. Make the design structure as close to the wireframe provided. You can add border radius, opacity, colours, etc. to make the design look better.
