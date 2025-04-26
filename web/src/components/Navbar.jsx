@@ -10,12 +10,14 @@ export default function Navbar() {
       style={{ overflow: "visible" }}
     >
       <div className="flex items-center gap-2 select-none">
-        <img
-          src={logoVision}
-          alt="Vision Logo"
-          className="h-9 mr-2"
-          style={{ width: 150 }}
-        />
+        <Link to="/">
+          <img
+            src={logoVision}
+            alt="Vision Logo"
+            className="h-9 mr-2"
+            style={{ width: 150 }}
+          />
+        </Link>
       </div>
       <div className="flex space-x-6">
         <Link
